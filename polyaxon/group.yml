@@ -1,0 +1,37 @@
+---
+version: 1
+
+kind: group
+
+build:
+  dockerfile: polyaxon/docker/experiment.df
+  context: .
+
+hptuning:
+    seed: 42
+    concurrency: 3
+    random_search:
+        n_experiments: 2
+    
+    matrix:          
+        units:
+          values: [32, 64]
+
+        seq_length:
+          values: [10, 30, 60]  # to update to fixed seq_length once done
+
+environment:
+  resources:
+   cpu:
+     limits: 1
+  persistence:
+    data: ["data"]
+
+run:
+  cmd: python -m src.experiment.main --train_path=/polyaxon-data/aiap5/workspace/hariz_liew/team5project/data/train_clean.csv \
+                                     --val_path=/polyaxon-data/aiap5/workspace/hariz_liew/team5project/data/val_clean.csv \ 
+                                     --network=gru \
+                                     --units={{ units }} \
+                                     --seq_length{{ seq_length }}
+                                     --epochs=8 \
+                                     --batch_size=512

@@ -1,0 +1,21 @@
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6.7
+  - pip=19.0.3
+  - numpy=1.17.2 # so we get the mkl libs as well
+  - pandas=0.25.1
+  - nltk=3.4.5
+  - seaborn=0.10.0
+  - scikit-learn=0.22.1
+  - wordcloud=1.6.0
+  - tensorflow==2.1.0
+  - pip:
+    - polyaxon-cli==0.5.6
+    - pytest==4.6.3
+    - pylint==2.3.1
+    - flask==1.1.1
+    - gunicorn==20.0.4
+    - python-dotenv==0.12.0
+    - tweepy==3.8.0

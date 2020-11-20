@@ -1,0 +1,20 @@
+---
+version: 1
+
+kind: experiment
+
+build:
+  dockerfile: polyaxon/docker/experiment.df
+  context: .
+
+environment:
+  persistence:
+    data: ["data"] # Set this to the key that will be provided to you
+    outputs: exp-output
+
+
+logging:
+  level: DEBUG
+
+run:
+  cmd: python -m src.experiment.main --train_path=/polyaxon-data/aiap5/workspace/hariz_liew/team5project/data/train_clean.csv --val_path=/polyaxon-data/aiap5/workspace/hariz_liew/team5project/data/val_clean.csv --network=lstm --units=32 --epochs=25 --batch_size=128 --seq_length=9 --bidirectional=False
